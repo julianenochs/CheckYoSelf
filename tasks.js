@@ -6,7 +6,7 @@ class ToDoList {
 	}
 
 	saveToStorage() {
+	  console.log(newTaskList)
 	  localStorage.setItem("list", JSON.stringify(newTaskList));
 	}
 }
-
