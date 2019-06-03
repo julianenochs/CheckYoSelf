@@ -28,8 +28,9 @@ function addNewItem() {
 		return ''
 	} else {
 	var list = new ToDoList(titleInput.value, taskInput.value, Date.now());
-	newArray.push(taskInput.value, Date.now())
+	newArray.push({value: taskInput.value, id: Date.now()}) 
 	addTask();
+	makeTaskListBtn.disabled = false;
 	}
 }
 
@@ -53,7 +54,7 @@ function clearInput() {
 
 function deleteTaskItem(e) {
   var id = parseInt(e.target.dataset.id)
-  console.log(id)
+  // console.log(id)
    if (e.target.className === 'nav__delete') {
      e.target.parentElement.remove(id);
   }
@@ -62,23 +63,36 @@ function deleteTaskItem(e) {
 
 function makeNewList(e) {
 	e.preventDefault();
-	if (titleInput.value === '' || taskInput.value === '') {
+	if (titleInput.value == '') {
 		makeTaskListBtn.disabled = true;
 	} else {
 	var list = new ToDoList(titleInput.value, newArray, Date.now());
-	for (var i = 0; i < newArray.length; i++) {
-		newArray[i].id 
-	}
 	newTaskList.push(list)
 	addTaskList(list);
   }
 }
+
 function addTaskList(list) {
 	var template = document.getElementById('js-new-task__template');
 	var clone = template.content.cloneNode(true);
 	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
 	clone.getElementById('js-task__title').innerText = list.title
-	clone.getElementById('js-task__body').innerText = list.list
+	console.log(list.list)
+	for (var i = 0; i < list.list.length; i++) {
+	clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<img 
+  	  	  	  src='svg/checkbox.svg'
+  	  	  	  alt='checkbox'
+  	  	  	  class='card__checkbox'
+  	  	  	  id='js-card__checkbox'
+  	  	  	  data-id=${list.list.id}
+  	  	  	  /> 
+  	  	  	  <p 
+  	  	  	    class='card-task'
+        	    id='js-card-task'>
+        	      ${list.list[i].value}
+  	  	  	  </p>`);
+
+	}
 	cardSection.insertBefore(clone, cardSection.firstChild);
 	list.saveToStorage(newTaskList);
 }

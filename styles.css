@@ -116,7 +116,6 @@ form {
 	font-size: 3.3em;
 	margin-top: 10px;
 	text-align: center;
-	/*padding-top:10px;*/
 	width: 18%;
 }
 
@@ -177,6 +176,8 @@ ul {
 
 .task__body {
 	border-top: solid 2px #FFC30C;
+	display: flex;
+	align-items: center;
 }
 
 .task__footer {
