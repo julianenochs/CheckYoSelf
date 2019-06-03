@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  	<link rel='stylesheet' type= 'text/css' href= 'reset.css'>
+    <link rel='stylesheet' type= 'text/css' href= 'styles.css'>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">  </head>
+  <body>
+    <main>
+      <header>
+        <h1> 
+          CHECK <span class='yellow'>YO'</span> SELF
+        </h1>
+        <div class='search__box'>
+        <img 
+          src='svg/search.svg'
+          class='search__icon'
+          id='js-search__icon'
+        >
+        <input 
+          type='text'
+          class='search__input'
+          id='js-search__input'
+          placeholder='Search'
+        > 
+        </div>
+    </header>
+    <div class='main__section'>
+    <nav>
+      <section class='top-nav'>
+        <form>
+        <label class='label__title'>
+        	Task Title
+        <input 
+          type='text'
+          class='title__input'
+          id='js-title__input'
+        >
+        </label>
+        </form>
+        <section id='inject-task__list'>
+        </section>
+        <template class='item__list' id='js-item__list'>
+        	<div class='item-list__box'>
+        	  <img 
+        	    src='svg/delete.svg'
+        	    class='nav__delete'
+        	    id='js-jav__delete'
+        	  >
+        	  <p 
+        	    class='nav-task'
+        	    id='js-nav-task'>
+			  {list}
+			</p>
+			</div>
+        </template>
+        <form>
+        <label class='label__item'>
+        	Task Item
+        <div class='item-input__box'>
+        <input 
+          type='text'
+          class='item__input'
+          id='js-item__input'
+        >
+        <div
+          class='add__button'
+          id='js-add__button'>
+        +
+        </div>
+        </div>
+        </label>
+        <button class='make-list__button' id='js-make-list__button'>
+        	Make Task List
+        </button>
+        <button class='clear-list__button' id='js-clear-list__button'>
+        	Clear All
+        </button>
+  	    </form>
+  	  </section>
+  	  <section class='bottom-nav'>
+  	  	<button class='filter__button' id='js-filter__button'>
+  	  		Filter by Urgency
+  	  	</button>
+  	  </section>
+  	</nav>
+  	<section class='card__section'>
+  		<!-- fake -->
+  	  	<!-- <article class='new-task__card' id='js-new-task__card' data-id={id}>
+  	  	  <div class='task__header' id='js-task__header'>
+  	  	    <h2 class='task__title' id='js-task__title'>title</h2>
+  	  	  </div>
+  	  	  <div class='task__body' id='js-task__body'>
+  	  	  	<ul class='task__text' id='js-task__text'>
+  	  	  		<img 
+  	  	  		  src='svg/checkbox.svg'
+  	  	  		  alt='checkbox'
+  	  	  		  class='card__checkbox'
+  	  	  		  id='js-card__checkbox'
+  	  	  		  >
+  	  	  		  <li>{list}</li>
+  	  	  	</ul>
+  	  	  </div>
+  	  	  <div class='task__footer' id='js-task__footer'>
+  	  	  	<div class='urgent__label'>
+  	  	  	<img 
+  	  	  	  src='svg/urgent.svg'
+  	  	  	  alt='mark as urgent'
+  	  	  	  class='inactive-urgent__icon'
+  	  	  	  id='js-inactive-urgent__icon'
+  	  	  	/>
+  	  	  	<p> 
+  	  	  	  Urgent
+  	  	  	</p>
+  	  	  </div>
+  	  	  	<div class='delete__label'>
+  	  	  	<img 
+  	  	  	  src='svg/delete.svg'
+  	  	  	  alt='delete button'
+  	  	  	  class='inactive-delete__button'
+  	  	  	  id='js-inactive-delete__button'
+  	  	  	/>
+  	  	  	<p>
+  	  	  	  Delete
+  	  	  	</p>
+  	  	  </div>
+  	  	  </div>
+  	  	</article> -->
+  	  	<!-- fake -->
+  	</section>
+  </main>
+  	  <template class='new-task__template' id='js-new-task__template'>
+  	  	<article class='new-task__card' id='js-new-task__card' data-id={id}>
+  	  	  <div class='task__header' id='js-task__header'>
+  	  	    <h2 class='task__title' id='js-task__title'>title</h2>
+  	  	  </div>
+  	  	  <div class='task__body' id='js-task__body'>
+  	  	  		 <img 
+  	  	  		  src='svg/checkbox.svg'
+  	  	  		  alt='checkbox'
+  	  	  		  class='card__checkbox'
+  	  	  		  id='js-card__checkbox'
+  	  	  		  /> 
+  	  	  		  <p class='card-task'
+        	    id='js-card-task'>
+        	        {list}
+  	  	  		  </p>
+  	  	  </div>
+  	  	  <div class='task__footer' id='js-task__footer'>
+  	  	  	<div class='urgent__label'>
+  	  	  	<img 
+  	  	  	  src='svg/urgent.svg'
+  	  	  	  alt='mark as urgent'
+  	  	  	  class='inactive-urgent__icon'
+  	  	  	  id='js-inactive-urgent__icon'
+  	  	  	/>
+  	  	  	<p> 
+  	  	  	  Urgent
+  	  	  	</p>
+  	  	  </div>
+  	  	  	<div class='delete__label'>
+  	  	  	<img 
+  	  	  	  src='svg/delete.svg'
+  	  	  	  alt='delete button'
+  	  	  	  class='inactive-delete__button'
+  	  	  	  id='js-inactive-delete__button'
+  	  	  	/>
+  	  	  	<p>
+  	  	  	  Delete
+  	  	  	</p>
+  	  	  </div>
+  	  	  </div>
+  	  	</article>
+  	  </template>
+  	<script type='text/javascript' src='tasks.js'>
+  	</script>
+  	<script type ='text/javascript' src='main.js'>
+  	</script>
+</body>
+</html>
