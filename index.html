@@ -44,7 +44,7 @@
         	  <img 
         	    src='svg/delete.svg'
         	    class='nav__delete'
-        	    id='js-jav__delete'
+        	    id='js-nav__delete'
         	  >
         	  <p 
         	    class='nav-task'
@@ -84,48 +84,6 @@
   	  </section>
   	</nav>
   	<section class='card__section'>
-  		<!-- fake -->
-  	  	<!-- <article class='new-task__card' id='js-new-task__card' data-id={id}>
-  	  	  <div class='task__header' id='js-task__header'>
-  	  	    <h2 class='task__title' id='js-task__title'>title</h2>
-  	  	  </div>
-  	  	  <div class='task__body' id='js-task__body'>
-  	  	  	<ul class='task__text' id='js-task__text'>
-  	  	  		<img 
-  	  	  		  src='svg/checkbox.svg'
-  	  	  		  alt='checkbox'
-  	  	  		  class='card__checkbox'
-  	  	  		  id='js-card__checkbox'
-  	  	  		  >
-  	  	  		  <li>{list}</li>
-  	  	  	</ul>
-  	  	  </div>
-  	  	  <div class='task__footer' id='js-task__footer'>
-  	  	  	<div class='urgent__label'>
-  	  	  	<img 
-  	  	  	  src='svg/urgent.svg'
-  	  	  	  alt='mark as urgent'
-  	  	  	  class='inactive-urgent__icon'
-  	  	  	  id='js-inactive-urgent__icon'
-  	  	  	/>
-  	  	  	<p> 
-  	  	  	  Urgent
-  	  	  	</p>
-  	  	  </div>
-  	  	  	<div class='delete__label'>
-  	  	  	<img 
-  	  	  	  src='svg/delete.svg'
-  	  	  	  alt='delete button'
-  	  	  	  class='inactive-delete__button'
-  	  	  	  id='js-inactive-delete__button'
-  	  	  	/>
-  	  	  	<p>
-  	  	  	  Delete
-  	  	  	</p>
-  	  	  </div>
-  	  	  </div>
-  	  	</article> -->
-  	  	<!-- fake -->
   	</section>
   </main>
   	  <template class='new-task__template' id='js-new-task__template'>
@@ -134,16 +92,17 @@
   	  	    <h2 class='task__title' id='js-task__title'>title</h2>
   	  	  </div>
   	  	  <div class='task__body' id='js-task__body'>
-  	  	  		 <img 
-  	  	  		  src='svg/checkbox.svg'
-  	  	  		  alt='checkbox'
-  	  	  		  class='card__checkbox'
-  	  	  		  id='js-card__checkbox'
-  	  	  		  /> 
-  	  	  		  <p class='card-task'
+  	  	    <img 
+  	  	  	  src='svg/checkbox.svg'
+  	  	  	  alt='checkbox'
+  	  	  	  class='card__checkbox'
+  	  	  	  id='js-card__checkbox'
+  	  	  	  /> 
+  	  	  	  <p 
+  	  	  	    class='card-task'
         	    id='js-card-task'>
-        	        {list}
-  	  	  		  </p>
+        	      {newArray}
+  	  	  	  </p>
   	  	  </div>
   	  	  <div class='task__footer' id='js-task__footer'>
   	  	  	<div class='urgent__label'>

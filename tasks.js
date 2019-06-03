@@ -9,4 +9,3 @@ class ToDoList {
 	  localStorage.setItem("list", JSON.stringify(newTaskList));
 	}
 }
-
