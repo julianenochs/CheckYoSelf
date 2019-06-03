@@ -14,16 +14,16 @@ var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
 var deleteBtn = document.querySelector('#js-inactive-delete__button');
 var taskListArea = document.querySelector('#inject-task__list');
 var cardSection = document.querySelector('.card__section');
+// var newTasks = JSON.parse(localStorage.getItem("list")) || [];
 var newTaskList = JSON.parse(localStorage.getItem("list")) || [];
 
 addTaskBtn.addEventListener('click', addNewItem);
 makeTaskListBtn.addEventListener('click', makeNewList);
-clearListBtn.addEventListener('click', clearAll)
+clearListBtn.addEventListener('click', clearAll);
 
 function addNewItem() {
-	var list = new ToDoList(titleInput.value, newTaskList, Date.now());
+	var list = new ToDoList(titleInput.value, taskInput.value, Date.now());
 	newTaskList.push(taskInput.value)
-	console.log(newTaskList)
 	addTask();
 	list.saveToStorage(newTaskList)
 }
@@ -37,25 +37,31 @@ function addTask() {
 
 function makeNewList(e) {
 	e.preventDefault();
-	var list = new ToDoList(titleInput.value, newTaskList, Date.now());
+	var list = new ToDoList(titleInput.value, taskInput.value, Date.now());
 	newTaskList.push(list)
-	console.log(list);
 	addTaskList(list);
 	list.saveToStorage(newTaskList);
 }
 
-function addTaskList(list) {
+function addTaskList(list, newTaskList) {
 	var template = document.getElementById('js-new-task__template');
 	var clone = template.content.cloneNode(true);
 	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
 	clone.getElementById('js-task__title').innerText = list.title
-	clone.getElementById('js-task__body').innerText = list.
-	console.log(list.list)
+	clone.getElementById('js-task__body').innerText = list.list
 	cardSection.insertBefore(clone, cardSection.firstChild);
-	list.saveToStorage();	
+	list.saveToStorage(newTaskList);
 }
 
 function clearAll(){
-	titleInput.value = '';
-	taskInput.value = '';
+	titleInput = '';
+	taskInput = '';
 }
+
+
+
+
+
+
+
+
