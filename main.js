@@ -8,7 +8,7 @@ var makeTaskListBtn = document.querySelector('#js-make-list__button');
 var clearListBtn = document.querySelector('#js-clear-list__button');
 var filterBtn = document.querySelector('#js-filter__button');
 var taskTitle = document.querySelector('#js-task__title');
-var taskBody = document.querySelector('#js-nav-task');
+var taskBody = document.querySelector('#js-task__body');
 var checkbox = document.querySelector('#js-task__checklist');
 var taskText = document.querySelector('#js-task__text');
 var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
@@ -27,7 +27,7 @@ function addNewItem() {
 	if (taskInput.value === '') {
 		return ''
 	} else {
-	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
+	var list = new ToDoList({title: titleInput.value, list: newArray, id: Date.now()});
 	newArray.push(list)
 	addTask();
 	makeTaskListBtn.disabled = false;
@@ -64,7 +64,7 @@ function makeNewList(e) {
 	if (titleInput.value == '') {
 		makeTaskListBtn.disabled = true;
 	} else {
-	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()})
+	var list = new ToDoList({title: titleInput.value, list: newArray, id: Date.now()})
 	newTaskList.push(list)
 	addTaskList(list);
   }
@@ -97,7 +97,7 @@ function addTaskList(list) {
 function loadCards() {
   var loadArray = [];
   newTaskList.forEach(function(task){
-  	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
+  	var list = new ToDoList({title: titleInput.value, list: newArray, id: Date.now()});
     loadArray.push(list);
     addTaskList(list);
   })
