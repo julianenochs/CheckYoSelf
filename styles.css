@@ -165,8 +165,6 @@ ul {
 	margin: 10px;
 	display: inline;
 	height: fit-content;
-	min-height: 30%;
-	max-height: 50%;
 }
 
 .card__checkbox {
@@ -177,7 +175,11 @@ ul {
 .task__body {
 	border-top: solid 2px #FFC30C;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+}
+
+.task__body div {
+	display: flex;
 }
 
 .task__footer {
