@@ -1,7 +1,7 @@
 class ToDoList {
-	constructor(title, list, id) {
-		this.title = title;
-		this.list = list;
+	constructor(obj) {
+		this.title = obj.title;
+		this.list = obj.list;
 		this.id = Date.now();
 	}
 
