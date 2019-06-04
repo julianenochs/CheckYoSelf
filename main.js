@@ -8,7 +8,7 @@ var makeTaskListBtn = document.querySelector('#js-make-list__button');
 var clearListBtn = document.querySelector('#js-clear-list__button');
 var filterBtn = document.querySelector('#js-filter__button');
 var taskTitle = document.querySelector('#js-task__title');
-var taskBody = document.querySelector('#js-task__body');
+var taskBody = document.querySelector('#js-nav-task');
 var checkbox = document.querySelector('#js-task__checklist');
 var taskText = document.querySelector('#js-task__text');
 var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
@@ -45,7 +45,6 @@ function addTask() {
 	var clone = template.content.cloneNode(true);
 	clone.getElementById('js-nav-task').innerText = taskInput.value
 	taskListArea.insertBefore(clone, taskListArea.firstChild);
-	clearInput();
 }
 
 function clearInput() {
@@ -76,8 +75,8 @@ function addTaskList(list) {
 	var clone = template.content.cloneNode(true);
 	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
 	clone.getElementById('js-task__title').innerText = list.title
-	// for (var i = 0; i < list.list.length; i++) {
 		for (var i=0; i< newArray.length; i++){
+	console.log(list)
 	clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
   	  	  	  src='svg/checkbox.svg'
   	  	  	  alt='checkbox'
@@ -98,7 +97,7 @@ function addTaskList(list) {
 function loadCards() {
   var loadArray = [];
   newTaskList.forEach(function(task){
-  	var list = new ToDoList({title: titleInput.value, body: taskInput.value, id: Date.now()});
+  	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
     loadArray.push(list);
     addTaskList(list);
   })
