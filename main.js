@@ -60,13 +60,13 @@ function deleteTaskItem(e) {
   var task = findTask(id);
 }
 
-function makeNewList() {
+function makeNewList(e) {
+	e.preventDefault();
 	if (titleInput.value == '') {
 		makeTaskListBtn.disabled = true;
 	} else {
 	var list = new ToDoList(titleInput.value, newArray, Date.now());
 	newTaskList.push(list)
-	list.saveToStorage(newTaskList)
 	addTaskList(list);
   }
 }
@@ -76,7 +76,6 @@ function addTaskList(list) {
 	var clone = template.content.cloneNode(true);
 	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
 	clone.getElementById('js-task__title').innerText = list.title
-	console.log(list.list)
 	for (var i = 0; i < list.list.length; i++) {
 	clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
   	  	  	  src='svg/checkbox.svg'
@@ -95,17 +94,17 @@ function addTaskList(list) {
 	list.saveToStorage(newTaskList);
 }
 
-// function loadCards() {
-//   var loadArray = [];
-//   newTaskList.forEach(function(task){
-//     var list = new ToDoList(titleInput.value, newArray, Date.now());
-//     loadArray.push(list);
-//     makeNewList(list);
-//   })
-//   newTaskList = loadArray;
-// };
+function loadCards() {
+  var loadArray = [];
+  newTaskList.forEach(function(task){
+    var list = new ToDoList(titleInput.value, newArray, Date.now());
+    loadArray.push(list);
+    addTaskList(list);
+  })
+  newTaskList = loadArray;
+};
 
-// loadCards();
+loadCards();
 
 function clearAll() {
 	if (titleInput.value === ''){
