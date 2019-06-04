@@ -27,8 +27,8 @@ function addNewItem() {
 	if (taskInput.value === '') {
 		return ''
 	} else {
-	var list = new ToDoList(titleInput.value, taskInput.value, Date.now());
-	newArray.push({value: taskInput.value, id: Date.now()}) 
+	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
+	newArray.push(list)
 	addTask();
 	makeTaskListBtn.disabled = false;
 	}
@@ -65,7 +65,7 @@ function makeNewList(e) {
 	if (titleInput.value == '') {
 		makeTaskListBtn.disabled = true;
 	} else {
-	var list = new ToDoList(titleInput.value, newArray, Date.now());
+	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()})
 	newTaskList.push(list)
 	addTaskList(list);
   }
@@ -76,28 +76,29 @@ function addTaskList(list) {
 	var clone = template.content.cloneNode(true);
 	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
 	clone.getElementById('js-task__title').innerText = list.title
-	for (var i = 0; i < list.list.length; i++) {
+	// for (var i = 0; i < list.list.length; i++) {
+		for (var i=0; i< newArray.length; i++){
 	clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
   	  	  	  src='svg/checkbox.svg'
   	  	  	  alt='checkbox'
   	  	  	  class='card__checkbox'
   	  	  	  id='js-card__checkbox'
-  	  	  	  data-id=${list.list.id}
+  	  	  	  data-id=${list.id}
   	  	  	  /> 
   	  	  	  <p 
   	  	  	    class='card-task'
         	    id='js-card-task'>
-        	      ${list.list[i].value}
+        	      ${list.list}
   	  	  	  </p></div>`);
 	}
 	cardSection.insertBefore(clone, cardSection.firstChild);
 	list.saveToStorage(newTaskList);
 }
-
+	
 function loadCards() {
   var loadArray = [];
   newTaskList.forEach(function(task){
-    var list = new ToDoList(titleInput.value, newArray, Date.now());
+  	var list = new ToDoList({title: titleInput.value, body: taskInput.value, id: Date.now()});
     loadArray.push(list);
     addTaskList(list);
   })
