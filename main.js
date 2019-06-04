@@ -27,8 +27,8 @@ function addNewItem() {
 	if (taskInput.value === '') {
 		return ''
 	} else {
-	var list = new ToDoList({title: titleInput.value, list: newArray, id: Date.now()});
-	newArray.push(list)
+	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
+	newArray.push(list.list)
 	addTask();
 	makeTaskListBtn.disabled = false;
 	}
@@ -48,7 +48,7 @@ function addTask() {
 }
 
 function clearInput() {
-	taskInput.value = ''
+	taskInput.value = null;
 }
 
 function deleteTaskItem(e) {
@@ -76,7 +76,6 @@ function addTaskList(list) {
 	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
 	clone.getElementById('js-task__title').innerText = list.title
 		for (var i=0; i< newArray.length; i++){
-	console.log(list)
 	clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
   	  	  	  src='svg/checkbox.svg'
   	  	  	  alt='checkbox'
@@ -110,6 +109,7 @@ function clearAll() {
 	if (titleInput.value === ''){
 		clearListBtn.disabled = true;
 	}
-	titleInput = '';
-	taskInput = '';
+	nav.rest();
+	// titleInput = null;
+	// taskInput = null;
 }
