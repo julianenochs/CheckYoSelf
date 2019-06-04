@@ -95,8 +95,8 @@ function addTaskList(list) {
 	
 function loadCards() {
   var loadArray = [];
-  newTaskList.forEach(function(task){
-  	var list = new ToDoList({title: titleInput.value, list: newArray, id: Date.now()});
+  newTaskList.forEach(function(list){
+  	var list = new ToDoList(list.title, list.list, list.id);
     loadArray.push(list);
     addTaskList(list);
   })
