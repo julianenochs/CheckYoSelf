@@ -17,5 +17,5 @@ Time management was my main concern with this project.
 
 ![comp screenshot](https://frontend.turing.io/assets/images/projects/check-yo-self/check-yo-self-01.jpg)
 ![comp mobile screenshot](https://frontend.turing.io/assets/images/projects/check-yo-self/check-yo-self-04.jpg)
-![my screenshot](.svg/checkyodesktop.png)
-![my mobile screenshot](.svg/checkyomobile.png)
+![my screenshot](svg/checkyodesktop.png)
+![my mobile screenshot](svg/checkyomobile.png)
