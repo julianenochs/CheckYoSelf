@@ -1,8 +1,8 @@
 body {
 	display: flex;
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
 	font-size: 1em;
+	font-weight: 400;
 	height: 100vh;
 }
 
@@ -24,8 +24,8 @@ header {
 
 h1 {
 	color: #FFFFFF;
-	font-weight: 800;
 	font-size: 2em;
+	font-weight: 800;
 }
 
 .yellow {
@@ -59,8 +59,8 @@ nav {
 	display: flex;
 	flex-direction: column;
 	height: 91vh;
-	width: 20%;
 	padding: 5px;
+	width: 20%;
 }
 
 label {
@@ -99,8 +99,8 @@ form {
 }
 
 .item-list__box {
-	display: flex;
 	align-items: center;
+	display: flex;
 	padding: 10px;
 }
 
@@ -112,8 +112,8 @@ form {
 .add__button {
 	background-color: #1F1F3D;
 	border: solid 2px #1F1F3D;
-	height: 50px;
 	font-size: 3.3em;
+	height: 50px;
 	margin-top: 10px;
 	text-align: center;
 	width: 18%;
@@ -145,8 +145,8 @@ h2 {
 }
 
 ul {
-	display: flex;
 	align-items: center;
+	display: flex;
 }
 
 .card__section {
@@ -154,23 +154,27 @@ ul {
 	color: #1F1F3D;
 	display: flex;
 	height: 90vh;
-	width: 80%;
 	padding: 7px;
+	width: 80%;
 }
 
 .new-task__card {
 	background-color: #FFE89D;
 	border: solid 2px #FFC30C;
-	font-size: 1em;
-	width: 20%;
-	margin: 10px;
 	display: inline;
+	font-size: 1em;
 	height: fit-content;
+	margin: 10px;
+	width: 20%;
 }
 
 .card__checkbox {
 	height: 15px;
 	padding: 5px;
+}
+
+.checkbox {
+	content:url('svg/checkbox-active.svg')
 }
 
 .task__body {
@@ -183,13 +187,17 @@ ul {
 	display: flex;
 }
 
+.active-urgent__icon {
+	content:url('svg/urgent-active.svg');
+}
+
 .task__footer {
 	border-top: solid 2px #FFC30C;
 	color: #1F1F3D;
 	display: flex;
 	justify-content: space-between;
-	padding: 7px;
 	margin-top: 45px;
+	padding: 7px;
 }
 
 .inactive-urgent__icon,
@@ -199,19 +207,59 @@ ul {
 
 /************** MEDIA QUERIES **************/
 
-@media (max-width: 540px) {
-
+@media (max-width: 940px) {
 header {
+	display: block;
+	text-align: center;
+	padding: 20px;
+}
+
+nav {
+	text-align: center;
+	width:100%;
+}
+
+form {
+	display: inline-block;
+	width: 50%;
+}
+
+.main__section {
 	display: block;
 	text-align: center;
 }
 
+.top-nav {
+	text-align: center;
+}
+
+.bottom-nav {
+	margin-bottom: 10px;
+}
+
+.card__section {
+	height: 100%;
+	width: 100%;
+}
+
+.search__box {
+	display: inline-flex;
+	padding: 10px;
+}
+
+.item__input {
+	margin-left: 15px;
+	width: 70%;
+}
+
 .make-list__button,
-.clear-list__button,
-.filter__button  {
-	font-size: 100%;
+.clear-list__button  {
+	font-size: 10px;
+	width: 88%;
 }
 
+.filter__button {
+	font-size: 10px;
+	width: 45%;
 }
-
-
+}

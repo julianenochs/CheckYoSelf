@@ -13,6 +13,7 @@ var checkbox = document.querySelector('#js-task__checklist');
 var taskText = document.querySelector('#js-task__text');
 var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
 var deleteBtn = document.querySelector('#js-inactive-delete__button');
+var cardArea = document.querySelector('#js-card__checkbox');
 var taskListArea = document.querySelector('#inject-task__list');
 var cardSection = document.querySelector('.card__section');
 var newTaskList = JSON.parse(localStorage.getItem("list")) || [];
@@ -22,6 +23,7 @@ addTaskBtn.addEventListener('click', addNewItem);
 makeTaskListBtn.addEventListener('click', makeNewList);
 clearListBtn.addEventListener('click', clearAll);
 taskListArea.addEventListener('click', deleteTaskItem);
+cardSection.addEventListener('click', fireCardButtons);
 
 function addNewItem() {
     if (taskInput.value === '') {
@@ -34,11 +36,21 @@ function addNewItem() {
     }
 }
 
-function findTask(id) {
-  return newListItems.find(function(list) {    
-    return list.id === id
-  })
-};
+// function findTask(id) {
+//   return newListItems.find(function(list) {    
+//     return list.id === id
+//   })
+// };
+
+// function findTheIndex(id) {
+//   var findTheIndex = newTaskList.findTask(function(list) {
+//     if (list.id === parseInt(id)) {
+//       return list;
+//     }
+//   })
+
+//   return findTheIndex;
+// };
 
 function addTask() {
     var template = document.getElementById('js-item__list');
@@ -57,14 +69,31 @@ function deleteTaskItem(e) {
   }
 }
 
+function fireCardButtons(){
+  checkTaskItem();
+  toggleUrgent();
+}
+
+function checkTaskItem(e) { 
+  // var foundIndex = findTheIndex(id);
+  // newTaskList[foundIndex].saveToStorage(newTaskList)
+   var checkbox = document.getElementById('js-card__checkbox');
+     checkbox.classList.toggle('checkbox');
+  }
+
+function toggleUrgent(e) {
+  var urgent = document.getElementById('js-inactive-urgent__icon');
+  urgent.classList.toggle('active-urgent__icon')
+}
+
 function makeNewList(e) {
     e.preventDefault();
     if (titleInput.value == '') {
         makeTaskListBtn.disabled = true;
     } else {
-    var list = new ToDoList({title: titleInput.value, list: newListItems, id: Date.now()})
-    newTaskList.push(list)
-    addTaskList(list);
+      var list = new ToDoList({title: titleInput.value, list: newListItems, id: Date.now()})
+      newTaskList.push(list)
+      addTaskList(list);
   }
 }
 
@@ -83,11 +112,11 @@ function addTaskList(list) {
           id='js-card__checkbox'
           data-id=${item.id}
         /> 
-          <p 
-            class='card-task'
-                id='js-card-task'>
-                  ${item.value}
-                    </p></div>`
+        <p 
+         class='card-task'
+         id='js-card-task'>
+         ${item.value}
+        </p></div>`
     );
   })
     cardSection.insertBefore(clone, cardSection.firstChild);
