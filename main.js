@@ -28,7 +28,6 @@ function addNewItem() {
         return ''
     } else {
       var listItem = {value: taskInput.value, id: Date.now(), checked: false}
-    // var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
     newListItems.push(listItem)
     addTask();
     makeTaskListBtn.disabled = false;
@@ -75,15 +74,17 @@ function addTaskList(list) {
     clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
     clone.getElementById('js-task__title').innerText = list.title
     list.list.forEach(function(item){  
-     clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
-                    src='svg/checkbox.svg'
-                    alt='checkbox'
-                    class='card__checkbox'
-                    id='js-card__checkbox'
-                    data-id=${item.id}
-                    /> 
-                    <p 
-                      class='card-task'
+    clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', 
+      `<div data-id=${item.id}>
+        <img 
+          src='svg/checkbox.svg'
+          alt='checkbox'
+          class='card__checkbox'
+          id='js-card__checkbox'
+          data-id=${item.id}
+        /> 
+          <p 
+            class='card-task'
                 id='js-card-task'>
                   ${item.value}
                     </p></div>`
@@ -93,19 +94,18 @@ function addTaskList(list) {
     list.saveToStorage(newTaskList);
 }
 
-    
 function loadCards() {
   newTaskList.forEach(function(task){
     var list = new ToDoList({title: task.title, list: task.list, id: task.id});
     addTaskList(list)
   })
 };
-
 loadCards();
 
 function clearAll() {
     if (titleInput.value === ''){
         clearListBtn.disabled = true;
+    } else {
+    nav.reset();
     }
-    nav.rest();
 }
