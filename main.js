@@ -16,7 +16,7 @@ var deleteBtn = document.querySelector('#js-inactive-delete__button');
 var taskListArea = document.querySelector('#inject-task__list');
 var cardSection = document.querySelector('.card__section');
 var newTaskList = JSON.parse(localStorage.getItem("list")) || [];
-var newArray = [];
+var newListItems = [];
 
 addTaskBtn.addEventListener('click', addNewItem);
 makeTaskListBtn.addEventListener('click', makeNewList);
@@ -24,92 +24,88 @@ clearListBtn.addEventListener('click', clearAll);
 taskListArea.addEventListener('click', deleteTaskItem);
 
 function addNewItem() {
-	if (taskInput.value === '') {
-		return ''
-	} else {
-	var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
-	newArray.push(list.list)
-	addTask();
-	makeTaskListBtn.disabled = false;
-	}
+    if (taskInput.value === '') {
+        return ''
+    } else {
+      var listItem = {value: taskInput.value, id: Date.now(), checked: false}
+    // var list = new ToDoList({title: titleInput.value, list: taskInput.value, id: Date.now()});
+    newListItems.push(listItem)
+    addTask();
+    makeTaskListBtn.disabled = false;
+    }
 }
 
 function findTask(id) {
-  return newArray.find(function(list) {	
+  return newListItems.find(function(list) {    
     return list.id === id
   })
 };
 
 function addTask() {
-	var template = document.getElementById('js-item__list');
-	var clone = template.content.cloneNode(true);
-	clone.getElementById('js-nav-task').innerText = taskInput.value
-	taskListArea.insertBefore(clone, taskListArea.firstChild);
+    var template = document.getElementById('js-item__list');
+    var clone = template.content.cloneNode(true);
+    clone.getElementById('js-nav-task').innerText = taskInput.value
+    taskListArea.insertBefore(clone, taskListArea.firstChild);
 }
 
 function clearInput() {
-	taskInput.value = null;
+    taskInput.value = null;
 }
 
 function deleteTaskItem(e) {
-  var id = parseInt(e.target.dataset.id)
    if (e.target.className === 'nav__delete') {
-     e.target.parentElement.remove(id);
+     e.target.parentElement.remove();
   }
-  var task = findTask(id);
 }
 
 function makeNewList(e) {
-	e.preventDefault();
-	if (titleInput.value == '') {
-		makeTaskListBtn.disabled = true;
-	} else {
-	var list = new ToDoList({title: titleInput.value, list: newArray, id: Date.now()})
-	newTaskList.push(list)
-	addTaskList(list);
+    e.preventDefault();
+    if (titleInput.value == '') {
+        makeTaskListBtn.disabled = true;
+    } else {
+    var list = new ToDoList({title: titleInput.value, list: newListItems, id: Date.now()})
+    newTaskList.push(list)
+    addTaskList(list);
   }
 }
 
 function addTaskList(list) {
-	var template = document.getElementById('js-new-task__template');
-	var clone = template.content.cloneNode(true);
-	clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
-	clone.getElementById('js-task__title').innerText = list.title
-		for (var i=0; i< newArray.length; i++){
-	clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
-  	  	  	  src='svg/checkbox.svg'
-  	  	  	  alt='checkbox'
-  	  	  	  class='card__checkbox'
-  	  	  	  id='js-card__checkbox'
-  	  	  	  data-id=${list.id}
-  	  	  	  /> 
-  	  	  	  <p 
-  	  	  	    class='card-task'
-        	    id='js-card-task'>
-        	      ${list.list}
-  	  	  	  </p></div>`);
-	}
-	cardSection.insertBefore(clone, cardSection.firstChild);
-	list.saveToStorage(newTaskList);
-}
-	
-function loadCards() {
-  var loadArray = [];
-  newTaskList.forEach(function(list){
-  	var list = new ToDoList(list.title, list.list, list.id);
-    loadArray.push(list);
-    addTaskList(list);
+    var template = document.getElementById('js-new-task__template');
+    var clone = template.content.cloneNode(true);
+    clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
+    clone.getElementById('js-task__title').innerText = list.title
+    list.list.forEach(function(item){  
+     clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', `<div><img 
+                    src='svg/checkbox.svg'
+                    alt='checkbox'
+                    class='card__checkbox'
+                    id='js-card__checkbox'
+                    data-id=${item.id}
+                    /> 
+                    <p 
+                      class='card-task'
+                id='js-card-task'>
+                  ${item.value}
+                    </p></div>`
+    );
   })
-  newTaskList = loadArray;
+    cardSection.insertBefore(clone, cardSection.firstChild);
+    list.saveToStorage(newTaskList);
+}
+
+    
+function loadCards() {
+  newTaskList.forEach(function(task){
+    var list = new ToDoList({title: task.title, list: task.list, id: task.id});
+    addTaskList(list)
+  })
 };
 
 loadCards();
 
 function clearAll() {
-	if (titleInput.value === ''){
-		clearListBtn.disabled = true;
-	}
-	nav.rest();
-	// titleInput = null;
-	// taskInput = null;
+    if (titleInput.value === ''){
+        clearListBtn.disabled = true;
+    }
+    nav.rest();
 }
