@@ -197,3 +197,21 @@ ul {
 	height: 30px;
 }
 
+/************** MEDIA QUERIES **************/
+
+@media (max-width: 540px) {
+
+header {
+	display: block;
+	text-align: center;
+}
+
+.make-list__button,
+.clear-list__button,
+.filter__button  {
+	font-size: 100%;
+}
+
+}
+
+
