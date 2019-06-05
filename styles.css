@@ -159,8 +159,8 @@ ul {
 }
 
 .new-task__card {
-	background-color: #FFE89D;
-	border: solid 2px #FFC30C;
+	background-color: #FAFDFFa;
+	border: solid 2px #C7D3D8;
 	display: inline;
 	font-size: 1em;
 	height: fit-content;
@@ -178,7 +178,7 @@ ul {
 }
 
 .task__body {
-	border-top: solid 2px #FFC30C;
+	border-top: solid 2px #C7D3D8;
 	display: flex;
 	flex-direction: column;
 }
@@ -192,8 +192,8 @@ ul {
 }
 
 .task__footer {
-	border-top: solid 2px #FFC30C;
-	color: #1F1F3D;
+	border-top: solid 2px #C7D3D8;
+	color: #3C6577;
 	display: flex;
 	justify-content: space-between;
 	margin-top: 45px;

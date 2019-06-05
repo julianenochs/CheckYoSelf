@@ -9,7 +9,3 @@ class ToDoList {
 	  localStorage.setItem("list", JSON.stringify(newTaskList));
 	}
 }
-
-// create a new class for tasks / cards
-// unique ID for each ITEM
-// appendTaskListToCard (new card list )

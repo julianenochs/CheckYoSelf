@@ -27,30 +27,14 @@ cardSection.addEventListener('click', fireCardButtons);
 
 function addNewItem() {
     if (taskInput.value === '') {
-        return ''
+      return ''
     } else {
       var listItem = {value: taskInput.value, id: Date.now(), checked: false}
-    newListItems.push(listItem)
-    addTask();
-    makeTaskListBtn.disabled = false;
+      newListItems.push(listItem)
+      addTask();
+      makeTaskListBtn.disabled = false;
     }
 }
-
-// function findTask(id) {
-//   return newListItems.find(function(list) {    
-//     return list.id === id
-//   })
-// };
-
-// function findTheIndex(id) {
-//   var findTheIndex = newTaskList.findTask(function(list) {
-//     if (list.id === parseInt(id)) {
-//       return list;
-//     }
-//   })
-
-//   return findTheIndex;
-// };
 
 function addTask() {
     var template = document.getElementById('js-item__list');
@@ -66,22 +50,29 @@ function clearInput() {
 function deleteTaskItem(e) {
    if (e.target.className === 'nav__delete') {
      e.target.parentElement.remove();
+     newListItems.pop()
   }
 }
 
-function fireCardButtons(){
-  checkTaskItem();
-  toggleUrgent();
+function fireCardButtons(e){
+    checkTaskItem();
+    toggleUrgent();
+    deleteCardItem(e);
 }
 
-function checkTaskItem(e) { 
-  // var foundIndex = findTheIndex(id);
-  // newTaskList[foundIndex].saveToStorage(newTaskList)
+function deleteCardItem(e) {
+   if (e.target.className === 'inactive-delete__button') {
+     e.target.parentElement.parentElement.parentElement.remove();
+     // newListItems.pop()
+  }
+}
+
+function checkTaskItem() { 
    var checkbox = document.getElementById('js-card__checkbox');
      checkbox.classList.toggle('checkbox');
   }
 
-function toggleUrgent(e) {
+function toggleUrgent() {
   var urgent = document.getElementById('js-inactive-urgent__icon');
   urgent.classList.toggle('active-urgent__icon')
 }
@@ -89,7 +80,7 @@ function toggleUrgent(e) {
 function makeNewList(e) {
     e.preventDefault();
     if (titleInput.value == '') {
-        makeTaskListBtn.disabled = true;
+      makeTaskListBtn.disabled = true;
     } else {
       var list = new ToDoList({title: titleInput.value, list: newListItems, id: Date.now()})
       newTaskList.push(list)
@@ -124,17 +115,18 @@ function addTaskList(list) {
 }
 
 function loadCards() {
-  newTaskList.forEach(function(task){
+    newTaskList.forEach(function(task){
     var list = new ToDoList({title: task.title, list: task.list, id: task.id});
     addTaskList(list)
   })
 };
+
 loadCards();
 
 function clearAll() {
     if (titleInput.value === ''){
-        clearListBtn.disabled = true;
+      clearListBtn.disabled = true;
     } else {
-    nav.reset();
+      nav.reset();
     }
 }
