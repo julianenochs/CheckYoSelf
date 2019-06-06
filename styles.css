@@ -80,8 +80,7 @@ form {
 	border-bottom: solid 1px #1F1F3D;
 }
 
-.title__input,
-.item__input {
+.sidebar__input {
 	border-color: #1F1F3D;
 	font-size: 1em;
 	height: 30px;
@@ -119,9 +118,7 @@ form {
 	width: 18%;
 }
 
-.make-list__button,
-.clear-list__button,
-.filter__button {
+.sidebar__button {
 	background-color: #1F1F3D;
 	border: none;
 	color: #FFFFFF;
@@ -204,8 +201,7 @@ ul {
 	padding: 7px;
 }
 
-.inactive-urgent__icon,
-.inactive-delete__button {
+.inactive__button {
 	height: 30px;
 }
 
@@ -251,20 +247,14 @@ form {
 	padding: 10px;
 }
 
-.item__input {
+.sidebar__input {
 	margin-left: 15px;
 	width: 70%;
 }
 
-.make-list__button,
-.clear-list__button  {
+.sidebar__button  {
 	font-size: 10px;
 	width: 88%;
-}
-
-.filter__button {
-	font-size: 10px;
-	width: 45%;
 }
 }
 
