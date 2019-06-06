@@ -10,9 +10,8 @@ class ToDoList {
 	}
 
 	deleteFromStorage() {
-		
+		var indexFound = newTaskList.indexOf(this);
+    newTaskList.splice(indexFound, 1);
+    this.saveToStorage(newTaskList);
 	}
 }
-
-// functionality
-// masonry layout

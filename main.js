@@ -23,8 +23,6 @@ var newListItems = [];
 addTaskBtn.addEventListener('click', addNewItem);
 makeTaskListBtn.addEventListener('click', makeNewList);
 clearListBtn.addEventListener('click', clearAll);
-taskListArea.addEventListener('click', deleteTaskItem);
-// cardSection.addEventListener('click', fireCardButtons);
 
 function addNewItem() {
     if (taskInput.value === '') {
@@ -46,31 +44,10 @@ function addTask() {
     taskListArea.insertBefore(clone, taskListArea.firstChild);
 }
 
-function findId(listId) {
-    var taskId = parseInt(listId)
-    return taskId
-}
-
-// function clearInput() {
-//     taskInput.value = null;
-// }
-
 function deleteTaskItem(e) {
     if (e.target.className === 'nav__delete') {
       e.target.parentElement.remove();
       newListItems.pop()
-  }
-}
-
-function fireCardButtons(e){
-    checkTaskItem(e);
-    // toggleUrgent();
-    deleteCardItem(e);
-}
-
-function deleteCardItem(e) {
-   if (e.target.classList.contains('inactive-delete__button')) {
-     e.target.parentElement.parentElement.parentElement.remove();
   }
 }
 
@@ -99,7 +76,6 @@ function createTaskElement(item) {
   var img = document.createElement('img')
   addImgAttributes(img)
   img.addEventListener('click', function(){
-      // var imgSrc = e.path[1].childNodes[0].attributes[0].nodeValue
   if (img.attributes[0].nodeValue == 'svg/checkbox.svg') {
     img.attributes[0].nodeValue = 'svg/checkbox-active.svg'
   } else {
@@ -119,6 +95,12 @@ function addImgAttributes(img) {
   img.setAttribute('class', 'card__checkbox')
 }
 
+function removeCard(clone, list) {
+  var indexFound = newTaskList.indexOf(clone);
+  newTaskList.splice(indexFound, 1);
+  list.saveToStorage(newTaskList);
+}
+
 function addTaskList(list) {
     var template = document.getElementById('js-new-task__template');
     var clone = template.content.cloneNode(true);
@@ -131,6 +113,15 @@ function addTaskList(list) {
   } else {
     urgentBtn.attributes[0].nodeValue = 'svg/urgent.svg'
   }
+    })
+    var deleteBtn = clone.getElementById('js-inactive-delete__button')
+    deleteBtn.addEventListener('click', function(){
+  if (deleteBtn.attributes[0].nodeValue == 'svg/delete.svg') {
+    deleteBtn.attributes[0].nodeValue = 'svg/delete-active.svg'
+  } else {
+    deleteBtn.attributes[0].nodeValue = 'svg/delete.svg'
+  }
+  removeCard(clone, list)
     })
     list.list.forEach(function(item){ 
     var body = clone.getElementById('js-task__body')
