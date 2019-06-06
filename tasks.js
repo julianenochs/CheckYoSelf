@@ -8,9 +8,10 @@ class ToDoList {
 	saveToStorage() {
 	  localStorage.setItem("list", JSON.stringify(newTaskList));
 	}
-}
 
-// functionality
-// **** no js in html
-// masonry layout
-// clean up class
+	deleteFromStorage() {
+		var indexFound = newTaskList.indexOf(this);
+    newTaskList.splice(indexFound, 1);
+    this.saveToStorage(newTaskList);
+	}
+}

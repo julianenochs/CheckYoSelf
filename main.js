@@ -11,8 +11,6 @@ var taskTitle = document.querySelector('#js-task__title');
 var taskBody = document.querySelector('#js-task__body');
 var checkbox = document.querySelector('#js-task__checklist');
 var taskText = document.querySelector('#js-task__text');
-var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
-var deleteBtn = document.querySelector('#js-inactive-delete__button');
 var cardArea = document.querySelector('#js-card__checkbox');
 var taskListArea = document.querySelector('#inject-task__list');
 var navList = document.querySelector('#js-item-list__box');
@@ -25,8 +23,6 @@ var newListItems = [];
 addTaskBtn.addEventListener('click', addNewItem);
 makeTaskListBtn.addEventListener('click', makeNewList);
 clearListBtn.addEventListener('click', clearAll);
-taskListArea.addEventListener('click', deleteTaskItem);
-cardSection.addEventListener('click', fireCardButtons);
 
 function addNewItem() {
     if (taskInput.value === '') {
@@ -48,15 +44,6 @@ function addTask() {
     taskListArea.insertBefore(clone, taskListArea.firstChild);
 }
 
-function findId(listId) {
-    var taskId = parseInt(listId)
-    return taskId
-}
-
-function clearInput() {
-    taskInput.value = null;
-}
-
 function deleteTaskItem(e) {
     if (e.target.className === 'nav__delete') {
       e.target.parentElement.remove();
@@ -64,31 +51,7 @@ function deleteTaskItem(e) {
   }
 }
 
-function fireCardButtons(e){
-    checkTaskItem(e);
-    toggleUrgent();
-    deleteCardItem(e);
-}
-
-function deleteCardItem(e) {
-   if (e.target.classList.contains('inactive-delete__button')) {
-     e.target.parentElement.parentElement.parentElement.remove();
-  }
-}
-
-function checkTaskItem(e) { 
-  var checkbox = document.getElementById('js-card__checkbox');
-  if (e.target.classList.contains('js-card__checkbox')) {
-      checkbox.classList.toggle('checkbox');
-  }
-}
-
-function toggleUrgent() {
-  var urgent = document.getElementById('js-inactive-urgent__icon');
-  urgent.classList.toggle('active-urgent__icon')
-}
-
-function makeNewList(e, button) {
+function makeNewList(e) {
     e.preventDefault();
     if (titleInput.value == '') {
       makeTaskListBtn.disabled = true;
@@ -108,27 +71,62 @@ function handleButtons(input, button){
   }
 }
 
+function createTaskElement(item) {
+  var div = document.createElement('div')
+  var img = document.createElement('img')
+  addImgAttributes(img)
+  img.addEventListener('click', function(){
+  if (img.attributes[0].nodeValue == 'svg/checkbox.svg') {
+    img.attributes[0].nodeValue = 'svg/checkbox-active.svg'
+  } else {
+    img.attributes[0].nodeValue = 'svg/checkbox.svg'
+  }
+  })
+  var p = document.createElement('p')
+  p.innerText = item.value
+  div.appendChild(img)
+  div.appendChild(p)
+  return div
+}
+
+function addImgAttributes(img) {
+  img.setAttribute('src', 'svg/checkbox.svg')
+  img.setAttribute('alt', 'checkbox')
+  img.setAttribute('class', 'card__checkbox')
+}
+
+function removeCard(clone, list) {
+  var indexFound = newTaskList.indexOf(clone);
+  newTaskList.splice(indexFound, 1);
+  list.saveToStorage(newTaskList);
+}
+
 function addTaskList(list) {
     var template = document.getElementById('js-new-task__template');
     var clone = template.content.cloneNode(true);
     clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
     clone.getElementById('js-task__title').innerText = list.title
-    list.list.forEach(function(item){  
-    clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', 
-      `<div data-id=${item.id}>
-        <img 
-          src='svg/checkbox.svg'
-          alt='checkbox'
-          class='card__checkbox'
-          id='js-card__checkbox'
-          data-id=${item.id}
-        /> 
-        <p 
-         class='card-task'
-         id='js-card-task'>
-         ${item.value}
-        </p></div>`
-    );
+    var urgentBtn = clone.getElementById('js-inactive-urgent__icon')
+    urgentBtn.addEventListener('click', function(){
+  if (urgentBtn.attributes[0].nodeValue == 'svg/urgent.svg') {
+    urgentBtn.attributes[0].nodeValue = 'svg/urgent-active.svg'
+  } else {
+    urgentBtn.attributes[0].nodeValue = 'svg/urgent.svg'
+  }
+    })
+    var deleteBtn = clone.getElementById('js-inactive-delete__button')
+    deleteBtn.addEventListener('click', function(){
+  if (deleteBtn.attributes[0].nodeValue == 'svg/delete.svg') {
+    deleteBtn.attributes[0].nodeValue = 'svg/delete-active.svg'
+  } else {
+    deleteBtn.attributes[0].nodeValue = 'svg/delete.svg'
+  }
+  removeCard(clone, list)
+    })
+    list.list.forEach(function(item){ 
+    var body = clone.getElementById('js-task__body')
+    var task = createTaskElement(item)
+    body.appendChild(task)
   })
     cardSection.insertBefore(clone, cardSection.firstChild);
     list.saveToStorage(newTaskList);

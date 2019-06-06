@@ -4,6 +4,7 @@ body {
 	font-size: 1em;
 	font-weight: 400;
 	height: 100vh;
+	width: 100%;
 }
 
 main {
@@ -58,7 +59,7 @@ nav {
 	color: #FFFFFF;
 	display: flex;
 	flex-direction: column;
-	height: 91vh;
+	height: auto;
 	padding: 5px;
 	width: 20%;
 }
@@ -149,11 +150,10 @@ ul {
 .card__section {
 	background-color: #F3F6F7;
 	color: #1F1F3D;
-	column-width: 13em;
-	grid-auto-rows: 1fr;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-gap: 2em;
+	columns: 2 250px;
 	display: grid;
+	grid-gap: 30px;
+	grid-template-columns: 1fr 1fr;
 	height: 90vh;
 	padding: 7px;
 	width: 80%;
@@ -257,5 +257,3 @@ form {
 	width: 88%;
 }
 }
-
-/** classes can be condensed to one class ****/
