@@ -33,10 +33,11 @@ function addNewItem() {
       return ''
     } else {
       var listItem = {value: taskInput.value, id: Date.now()}
+      var listId = listItem.id
       newListItems.push(listItem)
       addTask();
       makeTaskListBtn.disabled = false;
-      findId(listItem.id);
+      findId(listId);
     }
 }
 
@@ -47,20 +48,19 @@ function addTask() {
     taskListArea.insertBefore(clone, taskListArea.firstChild);
 }
 
-function findId(listItem, e) {
-  var taskId = typeof(listItem.id)
-  console.log(taskId)
+function findId(listId) {
+    var taskId = parseInt(listId)
+    return taskId
 }
-
 
 function clearInput() {
     taskInput.value = null;
 }
 
 function deleteTaskItem(e) {
-   if (e.target.className === 'nav__delete') {
-     e.target.parentElement.remove();
-     newListItems.pop()
+    if (e.target.className === 'nav__delete') {
+      e.target.parentElement.remove();
+      newListItems.pop()
   }
 }
 
