@@ -26,7 +26,7 @@ addTaskBtn.addEventListener('click', addNewItem);
 makeTaskListBtn.addEventListener('click', makeNewList);
 clearListBtn.addEventListener('click', clearAll);
 taskListArea.addEventListener('click', deleteTaskItem);
-cardSection.addEventListener('click', fireCardButtons);
+// cardSection.addEventListener('click', fireCardButtons);
 
 function addNewItem() {
     if (taskInput.value === '') {
@@ -66,7 +66,7 @@ function deleteTaskItem(e) {
 
 function fireCardButtons(e){
     checkTaskItem(e);
-    toggleUrgent();
+    // toggleUrgent();
     deleteCardItem(e);
 }
 
@@ -76,18 +76,19 @@ function deleteCardItem(e) {
   }
 }
 
-function checkTaskItem(e) { 
-  // every time image is created, grab the element and attach an EL 
-  var checkbox = document.getElementById('js-card__checkbox');
-  if (e.target.classList.contains('js-card__checkbox')) {
-      checkbox.classList.toggle('checkbox');
-  }
-}
+// function checkTaskItem(e) { 
+//   var imgSrc = e.path[1].childNodes[0].attributes[0].nodeValue
+//   if (imgSrc === 'svg/checkbox.svg') {
+//     imgSrc = 'svg/checkbox-active.svg'
+//   } else {
+//     imgSrc = 'svg/checkbox.svg'
+//   }
+// }
 
-function toggleUrgent() {
-  var urgent = document.getElementById('js-inactive-urgent__icon');
-  urgent.classList.toggle('active-urgent__icon')
-}
+// function toggleUrgent() {
+//   var urgent = document.getElementById('js-inactive-urgent__icon');
+//   urgent.classList.toggle('active-urgent__icon')
+// }
 
 function makeNewList(e) {
     e.preventDefault();
@@ -113,7 +114,14 @@ function createTaskElement(item) {
   var div = document.createElement('div')
   var img = document.createElement('img')
   addImgAttributes(img)
-  img.addEventListener('click', checkTaskItem)
+  img.addEventListener('click', function(){
+      // var imgSrc = e.path[1].childNodes[0].attributes[0].nodeValue
+  if (img.attributes[0].nodeValue == 'svg/checkbox.svg') {
+    img.attributes[0].nodeValue = 'svg/checkbox-active.svg'
+  } else {
+    img.attributes[0].nodeValue = 'svg/checkbox.svg'
+  }
+  })
   var p = document.createElement('p')
   p.innerText = item.value
   div.appendChild(img)
@@ -134,9 +142,7 @@ function addTaskList(list) {
     clone.getElementById('js-task__title').innerText = list.title
     list.list.forEach(function(item){ 
     var body = clone.getElementById('js-task__body')
-    console.log(body)
     var task = createTaskElement(item)
-    console.log(task)
     body.appendChild(task)
     // body.appendChild(item);
   })
