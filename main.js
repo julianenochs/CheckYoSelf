@@ -11,8 +11,6 @@ var taskTitle = document.querySelector('#js-task__title');
 var taskBody = document.querySelector('#js-task__body');
 var checkbox = document.querySelector('#js-task__checklist');
 var taskText = document.querySelector('#js-task__text');
-var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
-var deleteBtn = document.querySelector('#js-inactive-delete__button');
 var cardArea = document.querySelector('#js-card__checkbox');
 var taskListArea = document.querySelector('#inject-task__list');
 var navList = document.querySelector('#js-item-list__box');
@@ -76,20 +74,6 @@ function deleteCardItem(e) {
   }
 }
 
-// function checkTaskItem(e) { 
-//   var imgSrc = e.path[1].childNodes[0].attributes[0].nodeValue
-//   if (imgSrc === 'svg/checkbox.svg') {
-//     imgSrc = 'svg/checkbox-active.svg'
-//   } else {
-//     imgSrc = 'svg/checkbox.svg'
-//   }
-// }
-
-// function toggleUrgent() {
-//   var urgent = document.getElementById('js-inactive-urgent__icon');
-//   urgent.classList.toggle('active-urgent__icon')
-// }
-
 function makeNewList(e) {
     e.preventDefault();
     if (titleInput.value == '') {
@@ -140,11 +124,18 @@ function addTaskList(list) {
     var clone = template.content.cloneNode(true);
     clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
     clone.getElementById('js-task__title').innerText = list.title
+    var urgentBtn = clone.getElementById('js-inactive-urgent__icon')
+    urgentBtn.addEventListener('click', function(){
+  if (urgentBtn.attributes[0].nodeValue == 'svg/urgent.svg') {
+    urgentBtn.attributes[0].nodeValue = 'svg/urgent-active.svg'
+  } else {
+    urgentBtn.attributes[0].nodeValue = 'svg/urgent.svg'
+  }
+    })
     list.list.forEach(function(item){ 
     var body = clone.getElementById('js-task__body')
     var task = createTaskElement(item)
     body.appendChild(task)
-    // body.appendChild(item);
   })
     cardSection.insertBefore(clone, cardSection.firstChild);
     list.saveToStorage(newTaskList);
