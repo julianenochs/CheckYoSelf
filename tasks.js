@@ -8,9 +8,11 @@ class ToDoList {
 	saveToStorage() {
 	  localStorage.setItem("list", JSON.stringify(newTaskList));
 	}
+
+	deleteFromStorage() {
+		
+	}
 }
 
 // functionality
-// **** no js in html
 // masonry layout
-// clean up class

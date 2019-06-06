@@ -53,9 +53,9 @@ function findId(listId) {
     return taskId
 }
 
-function clearInput() {
-    taskInput.value = null;
-}
+// function clearInput() {
+//     taskInput.value = null;
+// }
 
 function deleteTaskItem(e) {
     if (e.target.className === 'nav__delete') {
@@ -77,6 +77,7 @@ function deleteCardItem(e) {
 }
 
 function checkTaskItem(e) { 
+  // every time image is created, grab the element and attach an EL 
   var checkbox = document.getElementById('js-card__checkbox');
   if (e.target.classList.contains('js-card__checkbox')) {
       checkbox.classList.toggle('checkbox');
@@ -88,7 +89,7 @@ function toggleUrgent() {
   urgent.classList.toggle('active-urgent__icon')
 }
 
-function makeNewList(e, button) {
+function makeNewList(e) {
     e.preventDefault();
     if (titleInput.value == '') {
       makeTaskListBtn.disabled = true;
@@ -108,27 +109,36 @@ function handleButtons(input, button){
   }
 }
 
+function createTaskElement(item) {
+  var div = document.createElement('div')
+  var img = document.createElement('img')
+  addImgAttributes(img)
+  img.addEventListener('click', checkTaskItem)
+  var p = document.createElement('p')
+  p.innerText = item.value
+  div.appendChild(img)
+  div.appendChild(p)
+  return div
+}
+
+function addImgAttributes(img) {
+  img.setAttribute('src', 'svg/checkbox.svg')
+  img.setAttribute('alt', 'checkbox')
+  img.setAttribute('class', 'card__checkbox')
+}
+
 function addTaskList(list) {
     var template = document.getElementById('js-new-task__template');
     var clone = template.content.cloneNode(true);
     clone.getElementById('js-new-task__card').setAttribute('data-id', list.id)
     clone.getElementById('js-task__title').innerText = list.title
-    list.list.forEach(function(item){  
-    clone.getElementById('js-task__body').insertAdjacentHTML('afterbegin', 
-      `<div data-id=${item.id}>
-        <img 
-          src='svg/checkbox.svg'
-          alt='checkbox'
-          class='card__checkbox'
-          id='js-card__checkbox'
-          data-id=${item.id}
-        /> 
-        <p 
-         class='card-task'
-         id='js-card-task'>
-         ${item.value}
-        </p></div>`
-    );
+    list.list.forEach(function(item){ 
+    var body = clone.getElementById('js-task__body')
+    console.log(body)
+    var task = createTaskElement(item)
+    console.log(task)
+    body.appendChild(task)
+    // body.appendChild(item);
   })
     cardSection.insertBefore(clone, cardSection.firstChild);
     list.saveToStorage(newTaskList);
