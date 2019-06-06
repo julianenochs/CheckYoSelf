@@ -26,21 +26,21 @@
     </header>
     <div class='main__section'>
     <nav>
-      <section class='top-nav'>
+      <section class='top-nav' id='js-top-nav'>
         <form>
         <label class='label__title'>
         	Task Title
         <input 
           type='text'
-          class='title__input'
+          class='sidebar__input'
           id='js-title__input'
-        >
+        />
         </label>
         </form>
         <section id='inject-task__list'>
         </section>
         <template class='item__list' id='js-item__list'>
-        	<div class='item-list__box'>
+        	<div class='item-list__box' id='js-item-list__box'>
         	  <img 
         	    src='svg/delete.svg'
         	    class='nav__delete'
@@ -49,19 +49,19 @@
         	  <p 
         	    class='nav-task'
         	    id='js-nav-task'>
-			  {list}
+			  List
 			</p>
 			</div>
         </template>
-        <form>
+        <form id='js-nav__form'>
         <label class='label__item'>
         	Task Item
         <div class='item-input__box'>
         <input 
           type='text'
-          class='item__input'
+          class='sidebar__input'
           id='js-item__input'
-        >
+        />
         <div
           class='add__button'
           id='js-add__button'>
@@ -69,16 +69,16 @@
         </div>
         </div>
         </label>
-        <button class='make-list__button' id='js-make-list__button'>
+        <button class='sidebar__button' id='js-make-list__button'>
         	Make Task List
         </button>
-        <button class='clear-list__button' id='js-clear-list__button'>
+        <button class='sidebar__button' id='js-clear-list__button'>
         	Clear All
         </button>
   	    </form>
   	  </section>
   	  <section class='bottom-nav'>
-  	  	<button class='filter__button' id='js-filter__button'>
+  	  	<button class='sidebar__button' id='js-filter__button'>
   	  		Filter by Urgency
   	  	</button>
   	  </section>
@@ -98,7 +98,7 @@
   	  	  	<img 
   	  	  	  src='svg/urgent.svg'
   	  	  	  alt='mark as urgent'
-  	  	  	  class='inactive-urgent__icon'
+  	  	  	  class='inactive__button'
   	  	  	  id='js-inactive-urgent__icon'
   	  	  	/>
   	  	  	<p> 
@@ -109,7 +109,7 @@
   	  	  	<img 
   	  	  	  src='svg/delete.svg'
   	  	  	  alt='delete button'
-  	  	  	  class='inactive-delete__button'
+  	  	  	  class='inactive__button'
   	  	  	  id='js-inactive-delete__button'
   	  	  	/>
   	  	  	<p>

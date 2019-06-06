@@ -15,6 +15,9 @@ var urgentBtn = document.querySelector('#js-inactive-urgent__icon');
 var deleteBtn = document.querySelector('#js-inactive-delete__button');
 var cardArea = document.querySelector('#js-card__checkbox');
 var taskListArea = document.querySelector('#inject-task__list');
+var navList = document.querySelector('#js-item-list__box');
+var navForm = document.querySelector('#js-nav__form');
+var navStuff = document.querySelector('#js-top-nav');
 var cardSection = document.querySelector('.card__section');
 var newTaskList = JSON.parse(localStorage.getItem("list")) || [];
 var newListItems = [];
@@ -29,10 +32,11 @@ function addNewItem() {
     if (taskInput.value === '') {
       return ''
     } else {
-      var listItem = {value: taskInput.value, id: Date.now(), checked: false}
+      var listItem = {value: taskInput.value, id: Date.now()}
       newListItems.push(listItem)
       addTask();
       makeTaskListBtn.disabled = false;
+      findId(listItem.id);
     }
 }
 
@@ -42,6 +46,12 @@ function addTask() {
     clone.getElementById('js-nav-task').innerText = taskInput.value
     taskListArea.insertBefore(clone, taskListArea.firstChild);
 }
+
+function findId(listItem, e) {
+  var taskId = typeof(listItem.id)
+  console.log(taskId)
+}
+
 
 function clearInput() {
     taskInput.value = null;
@@ -55,29 +65,30 @@ function deleteTaskItem(e) {
 }
 
 function fireCardButtons(e){
-    checkTaskItem();
+    checkTaskItem(e);
     toggleUrgent();
     deleteCardItem(e);
 }
 
 function deleteCardItem(e) {
-   if (e.target.className === 'inactive-delete__button') {
+   if (e.target.classList.contains('inactive-delete__button')) {
      e.target.parentElement.parentElement.parentElement.remove();
-     // newListItems.pop()
   }
 }
 
-function checkTaskItem() { 
-   var checkbox = document.getElementById('js-card__checkbox');
-     checkbox.classList.toggle('checkbox');
+function checkTaskItem(e) { 
+  var checkbox = document.getElementById('js-card__checkbox');
+  if (e.target.classList.contains('js-card__checkbox')) {
+      checkbox.classList.toggle('checkbox');
   }
+}
 
 function toggleUrgent() {
   var urgent = document.getElementById('js-inactive-urgent__icon');
   urgent.classList.toggle('active-urgent__icon')
 }
 
-function makeNewList(e) {
+function makeNewList(e, button) {
     e.preventDefault();
     if (titleInput.value == '') {
       makeTaskListBtn.disabled = true;
@@ -85,6 +96,15 @@ function makeNewList(e) {
       var list = new ToDoList({title: titleInput.value, list: newListItems, id: Date.now()})
       newTaskList.push(list)
       addTaskList(list);
+      clearAll();
+      handleButtons(titleInput, makeTaskListBtn);
+      handleButtons(titleInput, clearListBtn);
+  }
+}
+
+function handleButtons(input, button){
+    if (input.value == '') {
+      button.disabled = true;
   }
 }
 
@@ -124,9 +144,5 @@ function loadCards() {
 loadCards();
 
 function clearAll() {
-    if (titleInput.value === ''){
-      clearListBtn.disabled = true;
-    } else {
-      nav.reset();
+      navForm.reset();
     }
-}
