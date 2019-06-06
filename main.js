@@ -33,7 +33,6 @@ function addNewItem() {
       newListItems.push(listItem)
       addTask();
       makeTaskListBtn.disabled = false;
-      findId(listId);
     }
 }
 
