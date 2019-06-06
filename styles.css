@@ -152,7 +152,11 @@ ul {
 .card__section {
 	background-color: #F3F6F7;
 	color: #1F1F3D;
-	display: flex;
+	column-width: 13em;
+	grid-auto-rows: 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 2em;
+	display: grid;
 	height: 90vh;
 	padding: 7px;
 	width: 80%;
@@ -165,7 +169,7 @@ ul {
 	font-size: 1em;
 	height: fit-content;
 	margin: 10px;
-	width: 20%;
+	width: 60%;
 }
 
 .card__checkbox {
@@ -263,3 +267,5 @@ form {
 	width: 45%;
 }
 }
+
+/** classes can be condensed to one class ****/

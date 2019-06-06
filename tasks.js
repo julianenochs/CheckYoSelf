@@ -9,3 +9,8 @@ class ToDoList {
 	  localStorage.setItem("list", JSON.stringify(newTaskList));
 	}
 }
+
+// functionality
+// **** no js in html
+// masonry layout
+// clean up class
